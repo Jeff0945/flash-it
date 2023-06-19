@@ -1,46 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green"
+    android:background="@drawable/practice_page_1"
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:id="@+id/frame_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/close_button"
+        android:layout_width="41dp"
+        android:layout_height="33dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.046"
+        app:srcCompat="@drawable/close" />
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/bottomAppBar"
-        android:layout_gravity="bottom"
-        android:background="@color/white"
-        app:fabCradleMargin="10dp"
-        app:fabCradleRoundedCornerRadius="50dp">
+    <ImageView
+        android:id="@+id/cards"
+        android:layout_width="296dp"
+        android:layout_height="224dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.197"
+        app:srcCompat="@drawable/cards" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/bottomNavigationView"
-            android:layout_marginEnd="20dp"
-            app:labelVisibilityMode="labeled"
-            android:background="@android:color/transparent"
-            app:menu="@menu/bottom_nav_menu"/>
+    <ImageView
+        android:id="@+id/page_no"
+        android:layout_width="87dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.53"
+        app:srcCompat="@drawable/page_no" />
 
-    </com.google.android.material.bottomappbar.BottomAppBar>
+    <ImageView
+        android:id="@+id/left_button"
+        android:layout_width="34dp"
+        android:layout_height="33dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.319"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.528"
+        app:srcCompat="@drawable/left_button" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:src="@drawable/ic_baseline_add_24"
-        app:layout_anchor="@id/bottomAppBar"
-        app:maxImageSize="40dp"
-        android:id="@+id/fab"
-        app:tint ="@color/green"/>
+    <ImageView
+        android:id="@+id/next_button"
+        android:layout_width="34dp"
+        android:layout_height="31dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.687"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.53"
+        app:srcCompat="@drawable/right_button" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <ImageView
+        android:id="@+id/answer"
+        android:layout_width="163dp"
+        android:layout_height="39dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.652"
+        app:srcCompat="@drawable/answer" />
+
+    <ImageView
+        android:id="@+id/audio_button"
+        android:layout_width="41dp"
+        android:layout_height="37dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.141"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.653"
+        app:srcCompat="@drawable/audio_on" />
+
+    <ImageView
+        android:id="@+id/edit_button"
+        android:layout_width="40dp"
+        android:layout_height="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.859"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.652"
+        app:srcCompat="@drawable/edit_button" />
+
+    <ImageView
+        android:id="@+id/level_plate"
+        android:layout_width="269dp"
+        android:layout_height="146dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.904"
+        app:srcCompat="@drawable/level_plate" />
+
+    <ImageView
+        android:id="@+id/medium_level_button"
+        android:layout_width="162dp"
+        android:layout_height="42dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.654"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.843"
+        app:srcCompat="@drawable/medium" />
+
+    <ImageView
+        android:id="@+id/easy_level_button"
+        android:layout_width="162dp"
+        android:layout_height="44dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.654"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.783"
+        app:srcCompat="@drawable/easy" />
+
+    <ImageView
+        android:id="@+id/hard_level_button"
+        android:layout_width="160dp"
+        android:layout_height="41dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.653"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.902"
+        app:srcCompat="@drawable/hard" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
