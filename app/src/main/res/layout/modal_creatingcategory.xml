@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="350dp"
-    android:layout_height="550dp"
+    android:layout_height="650dp"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@drawable/dialog_cc">
+    android:background="@drawable/dialog_cc"
+    android:backgroundTint="#9CF6ED">
 
     <ImageView
         android:layout_width="70dp"
@@ -39,13 +40,22 @@
 
     </LinearLayout>
 
+        <ListView
+            android:layout_height="450dp"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:id="@+id/list_view"
+            ></ListView>
+
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
         android:src="@drawable/ic_baseline_add_24"
-        android:layout_marginTop="380dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="15dp"
         android:layout_gravity="end"/>
 

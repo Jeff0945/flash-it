@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showBottomDialog();
+                Intent intent = new Intent(MainActivity.this, CreatingCardSetActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -68,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    //will be use on the next update
+
+    /*
     private void showBottomDialog(){
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -123,5 +127,6 @@ public class MainActivity extends AppCompatActivity {
         dialog.getWindow().setGravity(Gravity.BOTTOM);
 
     }
+     */
 
 }

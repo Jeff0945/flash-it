@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@drawable/dialog_cc">
+    android:background="@drawable/dialog_cc"
+    android:backgroundTint="#CBEFEE">
 
     <ImageView
         android:layout_width="70dp"
@@ -47,12 +49,14 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+
         android:hint="Enter Category">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/categoryInputEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:backgroundTint="#DEF6F6" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,7 +67,8 @@
         android:layout_gravity="end"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/black"
-        android:text="Confirm" />
+        android:backgroundTint="@color/teal_700"
+        android:text="Confirm"
+        app:cornerRadius="30dp" />
 
 </LinearLayout>
