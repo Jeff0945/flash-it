@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "FlashIt"
+rootProject.name = "flash it"
 include ':app'
