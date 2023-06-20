@@ -19,17 +19,20 @@
         app:layout_constraintVertical_bias="0.046"
         app:srcCompat="@drawable/close" />
 
-    <ImageView
-        android:id="@+id/page_no"
-        android:layout_width="87dp"
-        android:layout_height="40dp"
+    <TextView
+        android:id="@+id/numbers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00/10"
+        android:textColor="@color/teal_700"
+        android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.53"
-        app:srcCompat="@drawable/page_no" />
+        app:layout_constraintVertical_bias="0.526" />
 
     <ImageView
         android:id="@+id/left_button"
@@ -104,15 +107,27 @@
         app:srcCompat="@drawable/level_plate" />
 
     <ImageView
+        android:id="@+id/hard_level_button"
+        android:layout_width="160dp"
+        android:layout_height="41dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.689"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.905"
+        app:srcCompat="@drawable/hard" />
+
+    <ImageView
         android:id="@+id/medium_level_button"
         android:layout_width="162dp"
         android:layout_height="42dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.696"
+        app:layout_constraintHorizontal_bias="0.69"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.831"
+        app:layout_constraintVertical_bias="0.846"
         app:srcCompat="@drawable/medium" />
 
     <ImageView
@@ -121,23 +136,11 @@
         android:layout_height="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.696"
+        app:layout_constraintHorizontal_bias="0.69"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.771"
+        app:layout_constraintVertical_bias="0.786"
         app:srcCompat="@drawable/easy" />
-
-    <ImageView
-        android:id="@+id/hard_level_button"
-        android:layout_width="160dp"
-        android:layout_height="41dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.695"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.891"
-        app:srcCompat="@drawable/hard" />
 
     <ImageView
         android:id="@+id/big_card"
@@ -149,5 +152,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.184"
         app:srcCompat="@drawable/big_card" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="298dp"
+        android:layout_height="235dp"
+        android:paddingStart="110dp"
+        android:paddingTop="98dp"
+        android:text="TextView1"
+        android:textColor="@color/teal_700"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/big_card"
+        app:layout_constraintEnd_toEndOf="@+id/big_card"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="@+id/big_card"
+        app:layout_constraintTop_toTopOf="@+id/big_card"
+        app:layout_constraintVertical_bias="0.603" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
