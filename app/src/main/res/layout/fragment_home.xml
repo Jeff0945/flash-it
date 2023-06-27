@@ -4,317 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/homeFragment"
+    android:name="com.coretech.flashit.ui.home.HomeFragment"
     android:background="#A1D9D7">
 
 
-    <!--  Flashcard 1  -->
-    <!--Cloud-->
-    <!--    <ImageView-->
-    <!--        android:layout_width="30dp"-->
-    <!--        android:layout_height="30dp"-->
-    <!--        android:src="@drawable/upload"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.942"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_bias="0.036"-->
-    <!--        app:tint="#FFFFFF" />-->
 
     <ImageView
-        android:id="@+id/backgroundtop"
-        android:layout_width="479dp"
+        android:layout_width="440dp"
         android:layout_height="357dp"
         android:layout_marginTop="-200dp"
         android:src="@drawable/backgroundtops"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.05" />
 
     <SearchView
         android:id="@+id/search_home"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="50dp"
+        android:background="@drawable/name"
         android:gravity="center"
         android:iconifiedByDefault="false"
         android:queryHint="Search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.036" />
+        app:layout_constraintVertical_bias="0.035" />
 
-    <ImageView
-        android:id="@+id/card01"
-        android:layout_width="398dp"
-        android:layout_height="180dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="351dp"
+        android:layout_height="655dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="60dp"
+        android:layout_gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.292"
-        app:srcCompat="@drawable/rect" />
-
-    <TextView
-        android:id="@+id/name01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:letterSpacing="0.1"
-        android:text="Science"
-        android:textColor="#179495"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/card01"
-        app:layout_constraintEnd_toEndOf="@+id/card01"
-        app:layout_constraintHorizontal_bias="0.135"
-        app:layout_constraintStart_toStartOf="@+id/card01"
-        app:layout_constraintTop_toTopOf="@+id/card01"
-        app:layout_constraintVertical_bias="0.261" />
-
-    <Button
-        android:id="@+id/review01"
-        android:layout_width="93dp"
-        android:layout_height="35dp"
-        android:background="@drawable/button_border"
-        android:text="Review"
-        android:textColor="#009688"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/card01"
-        app:layout_constraintEnd_toEndOf="@+id/card01"
-        app:layout_constraintHorizontal_bias="0.139"
-        app:layout_constraintStart_toStartOf="@+id/card01"
-        app:layout_constraintTop_toTopOf="@+id/card01"
-        app:layout_constraintVertical_bias="0.754"
-        tools:ignore="TouchTargetSizeCheck" />
-
-<!--    <Button-->
-<!--        android:id="@+id/myButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@drawable/button_border"-->
-<!--        android:text="My Button" />-->
-
-    <Button
-        android:id="@+id/practice1"
-        android:layout_width="103dp"
-        android:layout_height="35dp"
-        android:background="@drawable/button_border"
-        android:text="Practice"
-        android:textSize="10sp"
-        android:textColor="#009688"
-        app:layout_constraintBottom_toBottomOf="@+id/card01"
-        app:layout_constraintEnd_toEndOf="@+id/card01"
-        app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="@+id/card01"
-        app:layout_constraintTop_toTopOf="@+id/card01"
-        app:layout_constraintVertical_bias="0.754"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <ImageView
-        android:id="@+id/edit1"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:src="@drawable/edit"
-        app:layout_constraintBottom_toBottomOf="@+id/card01"
-        app:layout_constraintEnd_toEndOf="@+id/card01"
-        app:layout_constraintHorizontal_bias="0.91"
-        app:layout_constraintStart_toStartOf="@+id/card01"
-        app:layout_constraintTop_toTopOf="@+id/card01"
-        app:layout_constraintVertical_bias="0.253"
-        app:tint="#179495" />
-
-    <ImageView
-        android:id="@+id/share1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/share"
-        app:layout_constraintBottom_toBottomOf="@+id/card01"
-        app:layout_constraintEnd_toEndOf="@+id/card01"
-        app:layout_constraintHorizontal_bias="0.877"
-        app:layout_constraintStart_toStartOf="@+id/card01"
-        app:layout_constraintTop_toTopOf="@+id/card01"
-        app:layout_constraintVertical_bias="0.75"
-        app:tint="#179495" />
-
-    <!--  Card02  -->
-
-    <ImageView
-        android:id="@+id/card02"
-        android:layout_width="398dp"
-        android:layout_height="180dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.555"
-        app:srcCompat="@drawable/rect" />
-
-    <TextView
-        android:id="@+id/name2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:letterSpacing="0.1"
-        android:text="Anatomy"
-        android:textColor="#179495"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/card02"
-        app:layout_constraintEnd_toEndOf="@+id/card02"
-        app:layout_constraintHorizontal_bias="0.138"
-        app:layout_constraintStart_toStartOf="@+id/card02"
-        app:layout_constraintTop_toTopOf="@+id/card02"
-        app:layout_constraintVertical_bias="0.268" />
-
-    <Button
-        android:layout_width="93dp"
-        android:layout_height="35dp"
-        android:background="@drawable/button_border"
-        android:text="Review"
-        android:textColor="#009688"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/card02"
-        app:layout_constraintEnd_toEndOf="@+id/card02"
-        app:layout_constraintHorizontal_bias="0.139"
-        app:layout_constraintStart_toStartOf="@+id/card02"
-        app:layout_constraintTop_toTopOf="@+id/card02"
-        app:layout_constraintVertical_bias="0.741"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <Button
-        android:id="@+id/practice2"
-        android:layout_width="103dp"
-        android:layout_height="35dp"
-        android:background="@drawable/button_border"
-        android:text="Practice"
-        android:textSize="10sp"
-        android:textColor="#009688"
-        app:layout_constraintBottom_toBottomOf="@+id/card02"
-        app:layout_constraintEnd_toEndOf="@+id/card02"
-        app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="@+id/card02"
-        app:layout_constraintTop_toTopOf="@+id/card02"
-        app:layout_constraintVertical_bias="0.741"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <ImageView
-        android:id="@+id/edit2"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:src="@drawable/edit"
-        app:layout_constraintBottom_toBottomOf="@+id/card02"
-        app:layout_constraintEnd_toEndOf="@+id/card02"
-        app:layout_constraintHorizontal_bias="0.91"
-        app:layout_constraintStart_toStartOf="@+id/card02"
-        app:layout_constraintTop_toTopOf="@+id/card02"
-        app:layout_constraintVertical_bias="0.233"
-        app:tint="#179495" />
-
-    <ImageView
-        android:id="@+id/share2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/share"
-        app:layout_constraintBottom_toBottomOf="@+id/card02"
-        app:layout_constraintEnd_toEndOf="@+id/card02"
-        app:layout_constraintHorizontal_bias="0.877"
-        app:layout_constraintStart_toStartOf="@+id/card02"
-        app:layout_constraintTop_toTopOf="@+id/card02"
-        app:layout_constraintVertical_bias="0.743"
-        app:tint="#179495" />
-
-    <!--  Card 03  -->
-
-    <ImageView
-        android:id="@+id/card03"
-        android:layout_width="398dp"
-        android:layout_height="180dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.820"
-        app:srcCompat="@drawable/rect" />
-
-    <TextView
-        android:id="@+id/name3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:letterSpacing="0.1"
-        android:text="Biology"
-        android:textColor="#179495"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/card03"
-        app:layout_constraintEnd_toEndOf="@+id/card03"
-        app:layout_constraintHorizontal_bias="0.134"
-        app:layout_constraintStart_toStartOf="@+id/card03"
-        app:layout_constraintTop_toTopOf="@+id/card03"
-        app:layout_constraintVertical_bias="0.257" />
-
-    <Button
-        android:id="@+id/review3"
-        android:layout_width="93dp"
-        android:layout_height="35dp"
-        android:background="@drawable/button_border"
-        android:text="Review"
-        android:textColor="#009688"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/card03"
-        app:layout_constraintEnd_toEndOf="@+id/card03"
-        app:layout_constraintHorizontal_bias="0.139"
-        app:layout_constraintStart_toStartOf="@+id/card03"
-        app:layout_constraintTop_toTopOf="@+id/card03"
-        app:layout_constraintVertical_bias="0.748"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <Button
-        android:id="@+id/practice3"
-        android:layout_width="103dp"
-        android:layout_height="35dp"
-        android:background="@drawable/button_border"
-        android:text="Practice"
-        android:textColor="#009688"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/card03"
-        app:layout_constraintEnd_toEndOf="@+id/card03"
-        app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="@+id/card03"
-        app:layout_constraintTop_toTopOf="@+id/card03"
-        app:layout_constraintVertical_bias="0.748"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <ImageView
-        android:id="@+id/edit3"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:src="@drawable/edit"
-        app:layout_constraintBottom_toBottomOf="@+id/card03"
-        app:layout_constraintEnd_toEndOf="@+id/card03"
-        app:layout_constraintHorizontal_bias="0.91"
-        app:layout_constraintStart_toStartOf="@+id/card03"
-        app:layout_constraintTop_toTopOf="@+id/card03"
-        app:layout_constraintVertical_bias="0.238"
-        app:tint="#179495" />
-
-    <ImageView
-        android:id="@+id/share3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/share"
-        app:layout_constraintBottom_toBottomOf="@+id/card03"
-        app:layout_constraintEnd_toEndOf="@+id/card03"
-        app:layout_constraintHorizontal_bias="0.881"
-        app:layout_constraintStart_toStartOf="@+id/card03"
-        app:layout_constraintTop_toTopOf="@+id/card03"
-        app:layout_constraintVertical_bias="0.743"
-        app:tint="#179495" />
-
-
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

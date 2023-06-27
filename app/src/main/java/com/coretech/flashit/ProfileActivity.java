@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 public class ProfileActivity extends AppCompatActivity {
 
     ImageView profile_card01;
+    ImageView profile_card02;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -28,6 +29,15 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileActivity.this, SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        profile_card02 = findViewById(R.id.profile_card02);
+        profile_card02.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, FeedbackActivity.class);
                 startActivity(intent);
             }
         });

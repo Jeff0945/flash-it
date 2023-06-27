@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="330dp"
+    android:layout_height="120dp"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@drawable/dialog_cc"
+    android:backgroundTint="#CBEFEE"
+    android:id="@+id/layoutCardCreate">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            android:text="Subject"
+            android:id="@+id/subject_update_view"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="5dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/reviewButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="2dp"
+            android:backgroundTint="@color/teal_700"
+            android:minHeight="48dp"
+            android:text="Review"
+            android:textSize="12sp"
+            app:cornerRadius="30dp" />
+
+        <Button
+            android:id="@+id/practiceButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="2dp"
+            android:backgroundTint="@color/teal_700"
+            android:minHeight="48dp"
+            android:text="Practice"
+            android:textSize="12sp"
+            app:cornerRadius="30dp" />
+    </LinearLayout>
+
+
+
+</LinearLayout>
