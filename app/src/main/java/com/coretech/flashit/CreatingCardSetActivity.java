@@ -2,6 +2,14 @@ package com.coretech.flashit;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.coretech.flashit.ui.home.HomeFragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -14,6 +22,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -24,16 +33,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
 
+import com.coretech.flashit.ui.home.HomeFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class CreatingCardSetActivity extends AppCompatActivity {
@@ -51,6 +63,8 @@ public class CreatingCardSetActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private static final String PREF_NAME = "CategoryPreferences";
     private static final String KEY_CATEGORIES = "categories";
+    private List<CardShape> cardShapes = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +75,6 @@ public class CreatingCardSetActivity extends AppCompatActivity {
         add_cards = findViewById(R.id.add_cards);
         cancel_Button = findViewById(R.id.cancel_Button);
         check_button = findViewById(R.id.check_button);
-
         // Initialize shared preferences
         sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
@@ -70,8 +83,14 @@ public class CreatingCardSetActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CreatingCardSetActivity.this, CreatingCardActivity.class);
                 startActivity(intent);
+
+                String subject = "Sample Subject"; // Replace with the actual subject
+                CardShape cardShape = new CardShape(subject);
+                cardShapes.add(cardShape);
+
             }
         });
+
 
         check_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +99,7 @@ public class CreatingCardSetActivity extends AppCompatActivity {
                 Intent intent = new Intent(CreatingCardSetActivity.this, MainActivity.class);
                 startActivity(intent);
             }
+
         });
 
         cancel_Button.setOnClickListener(new View.OnClickListener() {
@@ -128,10 +148,11 @@ public class CreatingCardSetActivity extends AppCompatActivity {
 
         list = getCategories();
 
-        // Add "None" category option to the list if it's not already present
-        if (!list.contains("None")) {
-            list.add("None");
+        // Move "None" category to the top if it's present in the list
+        if (list.contains("None")) {
+            list.remove("None");
         }
+        list.add(0, "None");
 
         arrayAdapter = new ArrayAdapter<>(getApplicationContext(),
                 android.R.layout.simple_list_item_1, list);
@@ -231,17 +252,23 @@ public class CreatingCardSetActivity extends AppCompatActivity {
                 TextInputEditText categoryEditText = dialog.findViewById(R.id.categoryInputEditText);
                 String subject = categoryEditText.getText().toString();
 
-                // Save the category to shared preferences
+                // Check if the category is empty
                 if (!subject.isEmpty()) {
+                    // Save the category to shared preferences
                     list.add(subject);
                     arrayAdapter.notifyDataSetChanged();
                     saveCategories(list);
-                }
+                    Toast.makeText(CreatingCardSetActivity.this, "Category: " + subject, Toast.LENGTH_SHORT).show();
 
-                // Dismiss the dialog
-                dialog.dismiss();
+                    // Dismiss the dialog
+                    dialog.dismiss();
+                } else {
+                    // Category is empty, display an error message
+                    Toast.makeText(CreatingCardSetActivity.this, "Please enter a category", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
 
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
