@@ -1,51 +1,34 @@
 package com.coretech.flashit;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.coretech.flashit.ui.home.HomeFragment;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.util.Log;
 
-import com.coretech.flashit.ui.home.HomeFragment;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 public class CreatingCardSetActivity extends AppCompatActivity {
@@ -55,6 +38,7 @@ public class CreatingCardSetActivity extends AppCompatActivity {
     Button add_cards;
     TextView category_btn;
     ListView list_view;
+    TextView cardSetName;
     ArrayList<String> list;
     Button confirmButton;
 
@@ -63,7 +47,6 @@ public class CreatingCardSetActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private static final String PREF_NAME = "CategoryPreferences";
     private static final String KEY_CATEGORIES = "categories";
-    private List<CardShape> cardShapes = new ArrayList<>();
 
 
     @Override
@@ -71,6 +54,7 @@ public class CreatingCardSetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creating_card_set);
 
+        cardSetName = findViewById(R.id.NameBTN);
         category_btn = findViewById(R.id.category_btn);
         add_cards = findViewById(R.id.add_cards);
         cancel_Button = findViewById(R.id.cancel_Button);
@@ -81,25 +65,30 @@ public class CreatingCardSetActivity extends AppCompatActivity {
         add_cards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CreatingCardSetActivity.this, CreatingCardActivity.class);
-                startActivity(intent);
+                if (saveToDatabase(cardSetName.getText().toString())) {
+                    Intent intent = new Intent(CreatingCardSetActivity.this, CreatingCardActivity.class);
+                    AppDatabase database = AppDatabase.getInstance(getApplicationContext());
 
-                String subject = "Sample Subject"; // Replace with the actual subject
-                CardShape cardShape = new CardShape(subject);
-                cardShapes.add(cardShape);
+                    add_cards.setClickable(false);
+                    add_cards.setText("Saving");
 
+                    AsyncTask.execute(() -> {
+                        intent.putExtra("card-set-id", database.cardSets().latest().id);
+
+                        startActivity(intent);
+                    });
+                }
             }
         });
-
 
         check_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CreatingCardSetActivity.this, "Check button was clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(CreatingCardSetActivity.this, MainActivity.class);
-                startActivity(intent);
+                if (saveToDatabase(cardSetName.getText().toString())) {
+                    Intent intent = new Intent(CreatingCardSetActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
             }
-
         });
 
         cancel_Button.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +107,23 @@ public class CreatingCardSetActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    // Checks if name is empty then saves Card Sets to database
+    private boolean saveToDatabase(String name) {
+        if (name.trim().length() == 0) {
+            Toast.makeText(getApplicationContext(), "Name field is required.", Toast.LENGTH_LONG).show();
+
+            return false;
+        }
+
+        AppDatabase database = AppDatabase.getInstance(getApplicationContext());
+
+        AsyncTask.execute(() -> {
+            database.cardSets().updateOrCreate(new ModelCardSets(name));
+        });
+
+        return true;
     }
 
     private boolean isDialogShowing = false; // Add this variable
