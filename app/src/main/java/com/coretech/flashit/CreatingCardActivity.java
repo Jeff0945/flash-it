@@ -1,8 +1,7 @@
 package com.coretech.flashit;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -10,14 +9,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.textfield.TextInputEditText;
 
 public class CreatingCardActivity extends AppCompatActivity {
-
+    Button add_another_cards;
     ImageView cancel_Button;
     ImageView check_button;
-    private String termInputData; //will store term data
-    private String descriptionInputData; //will store description data
+    TextInputEditText termInputField;
+    TextInputEditText descriptionInputField;
+    private Long cardSetId;
 
 
     @Override
@@ -27,17 +29,13 @@ public class CreatingCardActivity extends AppCompatActivity {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
+        add_another_cards = findViewById(R.id.add_another_cards);
         cancel_Button = findViewById(R.id.cancel_Button);
         check_button = findViewById(R.id.check_button);
+        termInputField = findViewById(R.id.termInputEditText);
+        descriptionInputField = findViewById(R.id.descriptionInputEditText);
 
-        check_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(CreatingCardActivity.this, "Check button was clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(CreatingCardActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+        cardSetId = getIntent().getExtras().getLong("card-set-id");
 
         cancel_Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,31 +49,57 @@ public class CreatingCardActivity extends AppCompatActivity {
         check_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Store the entered data
-                termInputData = ((TextInputEditText) findViewById(R.id.termInputEditText)).getText().toString();
-                descriptionInputData = ((TextInputEditText) findViewById(R.id.descriptionInputEditText)).getText().toString();
+                if (saveToDatabase(termInputField.getText().toString(), descriptionInputField.getText().toString())) {
+                    Intent intent = new Intent(CreatingCardActivity.this, MainActivity.class);
 
-                Toast.makeText(CreatingCardActivity.this, "Check button was clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(CreatingCardActivity.this, MainActivity.class);
-                startActivity(intent);
+                    startActivity(intent);
+                }
             }
         });
 
-        Button add_another_cards = findViewById(R.id.add_another_cards);
         add_another_cards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Clear the existing input data
-                termInputData = null;
-                descriptionInputData = null;
-
-                // Clear the input fields
-                ((TextInputEditText) findViewById(R.id.termInputEditText)).setText("");
-                ((TextInputEditText) findViewById(R.id.descriptionInputEditText)).setText("");
-
-                Toast.makeText(CreatingCardActivity.this, "Add Another Card clicked", Toast.LENGTH_SHORT).show();
+                if (saveToDatabase(termInputField.getText().toString(), descriptionInputField.getText().toString())) {
+                    // Clear the input fields
+                    termInputField.setText("");
+                    descriptionInputField.setText("");
+                }
             }
         });
+    }
 
+    private boolean saveToDatabase(String question, String answer) {
+        if (question.trim().length() == 0 || answer.trim().length() == 0) {
+            Toast.makeText(CreatingCardActivity.this, "Term and Description field is required.", Toast.LENGTH_LONG).show();
+
+            return false;
+        }
+
+        disableButtons();
+
+        AppDatabase database = AppDatabase.getInstance(getApplicationContext());
+
+        AsyncTask.execute(() -> {
+            database.cards().updateOrCreate(new ModelCards(cardSetId, question, answer));
+        });
+
+        enableButtons();
+
+        return true;
+    }
+
+    private void disableButtons() {
+        check_button.setClickable(false);
+        cancel_Button.setClickable(false);
+        add_another_cards.setClickable(false);
+        add_another_cards.setText("Saving");
+    }
+
+    private void enableButtons() {
+        check_button.setClickable(true);
+        cancel_Button.setClickable(true);
+        add_another_cards.setClickable(true);
+        add_another_cards.setText("Add another card");
     }
 }
