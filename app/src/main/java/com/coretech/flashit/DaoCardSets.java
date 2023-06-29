@@ -15,7 +15,7 @@ public interface DaoCardSets {
     List<ModelCardSets> all();
 
     @Query("SELECT * FROM card_sets WHERE id = :id LIMIT 1")
-    ModelCards find(long id);
+    ModelCardSets find(long id);
 
     @Query("SELECT * FROM card_sets ORDER BY id DESC LIMIT 1")
     ModelCardSets latest();
