@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,13 +35,13 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new ItemSpacingDecoration(24)); // Set the spacing between items
 
-        AppDatabase appDatabase = AppDatabase.getInstance(getContext());
+        AppDatabase database = AppDatabase.getInstance(getContext());
 
         AsyncTask.execute(() -> {
-            List<ModelCardSets> cardSets = appDatabase.cardSets().all();
+            List<ModelCardSets> cardSets = database.cardSets().all();
 
             for(int i = 0; i < cardSets.size(); i++) {
-                cardShapes.add(new CardShape(cardSets.get(i).name));
+                cardShapes.add(new CardShape(cardSets.get(i)));
             }
         });
         adapter.notifyDataSetChanged();
