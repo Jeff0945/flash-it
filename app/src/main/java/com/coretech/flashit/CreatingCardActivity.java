@@ -21,7 +21,6 @@ public class CreatingCardActivity extends AppCompatActivity {
     TextInputEditText descriptionInputField;
     private Long cardSetId;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -25,8 +25,10 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/NameBTN"
@@ -47,44 +49,44 @@
         app:layout_constraintVertical_bias="0.237" />
 
 
-    <EditText
-        android:id="@+id/DefinitionOptBTN"
-        android:layout_width="360dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/name"
-        android:ems="10"
-        android:hint="Description - Optional"
-        android:inputType="textPersonName"
-        android:paddingStart="20dp"
-        android:singleLine="true"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NameBTN"
-        app:layout_constraintVertical_bias="0.021" />
+<!--    <EditText-->
+<!--        android:id="@+id/DefinitionOptBTN"-->
+<!--        android:layout_width="360dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:background="@drawable/name"-->
+<!--        android:ems="10"-->
+<!--        android:hint="Description - Optional"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:paddingStart="20dp"-->
+<!--        android:singleLine="true"-->
+<!--        android:textSize="14sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/NameBTN"-->
+<!--        app:layout_constraintVertical_bias="0.021" />-->
 
-    <TextView
-        android:id="@+id/category_btn"
-        android:layout_width="180dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/shapebtn"
-        android:paddingStart="20dp"
-        android:paddingTop="10dp"
-        android:text="Category"
-        android:textColor="@color/teal_700"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/add_cards"
-        app:layout_constraintEnd_toEndOf="@+id/DefinitionOptBTN"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/DefinitionOptBTN"
-        app:layout_constraintTop_toBottomOf="@+id/DefinitionOptBTN"
-        app:layout_constraintVertical_bias="0.031" />
+<!--    <TextView-->
+<!--        android:id="@+id/category_btn"-->
+<!--        android:layout_width="180dp"-->
+<!--        android:layout_height="75dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:background="@drawable/shapebtn"-->
+<!--        android:paddingStart="20dp"-->
+<!--        android:paddingTop="10dp"-->
+<!--        android:text="Category"-->
+<!--        android:textColor="@color/teal_700"-->
+<!--        android:textSize="14sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/add_cards"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/DefinitionOptBTN"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/DefinitionOptBTN"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/DefinitionOptBTN"-->
+<!--        app:layout_constraintVertical_bias="0.031" />-->
 
     <ImageView
         android:id="@+id/check_button"
@@ -98,19 +100,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.146" />
 
-    <TextView
-        android:id="@+id/updateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="18sp"
-        android:textStyle="italic|bold"
-        app:layout_constraintBottom_toBottomOf="@+id/category_btn"
-        app:layout_constraintEnd_toEndOf="@+id/category_btn"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="@+id/category_btn"
-        app:layout_constraintTop_toTopOf="@+id/category_btn"
-        app:layout_constraintVertical_bias="0.607" />
+<!--    <TextView-->
+<!--        android:id="@+id/updateTextView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="TextView"-->
+<!--        android:textSize="18sp"-->
+<!--        android:textStyle="italic|bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/category_btn"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/category_btn"-->
+<!--        app:layout_constraintHorizontal_bias="0.509"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/category_btn"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/category_btn"-->
+<!--        app:layout_constraintVertical_bias="0.607" />-->
 
     <Button
         android:id="@+id/add_cards"
@@ -124,7 +126,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DefinitionOptBTN"
+        app:layout_constraintTop_toBottomOf="@+id/NameBTN"
         app:layout_constraintVertical_bias="0.492" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

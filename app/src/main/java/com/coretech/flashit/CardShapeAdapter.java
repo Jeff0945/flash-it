@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -43,14 +44,26 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
         private TextView subjectTextView;
         private Button reviewButton;
         private Button practiceButton;
+        private ImageView editName_button;
         private LinearLayout layoutCardCreate;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             subjectTextView = itemView.findViewById(R.id.subject_update_view);
             reviewButton = itemView.findViewById(R.id.reviewButton);
-            practiceButton = itemView.findViewById(R.id.practiceButton);
+//            practiceButton = itemView.findViewById(R.id.practiceButton);
             layoutCardCreate = itemView.findViewById(R.id.layoutCardCreate);
+            editName_button = itemView.findViewById(R.id.editName_button);
+
+            editName_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Launch CreatingCardSetActivity
+                    Context context = itemView.getContext();
+                    Intent intent = new Intent(context, CreatingCardSetActivity.class);
+                    context.startActivity(intent);
+                }
+            });
 
             reviewButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -62,15 +75,15 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
                 }
             });
 
-            practiceButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Launch PracticeActivity
-                    Context context = itemView.getContext();
-                    Intent intent = new Intent(context, PracticeActivity.class);
-                    context.startActivity(intent);
-                }
-            });
+//            practiceButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    // Launch PracticeActivity
+//                    Context context = itemView.getContext();
+//                    Intent intent = new Intent(context, PracticeActivity.class);
+//                    context.startActivity(intent);
+//                }
+//            });
 
             layoutCardCreate.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,6 +94,8 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
                     context.startActivity(intent);
                 }
             });
+
+
         }
 
         public void bind(CardShape cardShape) {

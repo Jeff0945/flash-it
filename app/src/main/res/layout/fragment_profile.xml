@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/profile_card01"
-        android:layout_width="391dp"
-        android:layout_height="116dp"
+        android:layout_width="400dp"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
@@ -35,7 +35,7 @@
         android:id="@+id/circularImage"
         android:layout_width="86dp"
         android:layout_height="85dp"
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@drawable/no_profile_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.079"
@@ -87,8 +87,8 @@
 
     <ImageView
         android:id="@+id/profile_card02"
-        android:layout_width="391dp"
-        android:layout_height="116dp"
+        android:layout_width="400dp"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.45"
@@ -141,31 +141,33 @@
         android:id="@+id/profile_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Karl Richie B. Vacalares"
+        android:layout_marginStart="24dp"
+        android:text="Guest"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.586"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/circularImage"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.085" />
+        app:layout_constraintVertical_bias="0.077" />
 
     <TextView
         android:id="@+id/profile_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="unknownuser143@gmail.com"
+        android:layout_marginStart="24dp"
+        android:text="guest@guest.com"
         android:textColor="@color/white"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/circularImage"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintVertical_bias="0.104" />
 
-<!--    <ImageView-->
+    <!--    <ImageView-->
 <!--        android:id="@+id/imageView"-->
 <!--        android:layout_width="23dp"-->
 <!--        android:layout_height="23dp"-->

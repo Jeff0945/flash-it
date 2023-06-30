@@ -14,7 +14,7 @@ public class CardsViewingTab extends AppCompatActivity {
 
     ImageView cancel_Button;
     Button add_cards;
-    Button practiceButton;
+    Button reviewButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,13 +22,13 @@ public class CardsViewingTab extends AppCompatActivity {
 
         cancel_Button = findViewById(R.id.cancel_Button);
         add_cards = findViewById(R.id.add_cards);
-        practiceButton = findViewById(R.id.practiceButton);
+        reviewButton = findViewById(R.id.reviewButton);
 
-        practiceButton.setOnClickListener(new View.OnClickListener() {
+        reviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CardsViewingTab.this, "Practice button was clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(CardsViewingTab.this, PracticeActivity.class);
+                Toast.makeText(CardsViewingTab.this, "Review button was clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CardsViewingTab.this, ReviewActivity.class);
                 startActivity(intent);
             }
         });
