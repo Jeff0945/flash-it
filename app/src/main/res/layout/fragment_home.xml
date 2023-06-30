@@ -8,11 +8,9 @@
     android:name="com.coretech.flashit.ui.home.HomeFragment"
     android:background="#A1D9D7">
 
-
-
     <ImageView
         android:layout_width="440dp"
-        android:layout_height="357dp"
+        android:layout_height="355dp"
         android:layout_marginTop="-200dp"
         android:src="@drawable/backgroundtops"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,8 +22,8 @@
 
     <SearchView
         android:id="@+id/search_home"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/name"
         android:gravity="center"
         android:iconifiedByDefault="false"
@@ -39,13 +37,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="351dp"
-        android:layout_height="655dp"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="160dp"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:layout_marginTop="160dp"
+        android:layout_marginBottom="130dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

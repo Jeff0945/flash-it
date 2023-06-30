@@ -1,15 +1,11 @@
 package com.coretech.flashit.ui.home;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,7 +15,6 @@ import com.coretech.flashit.AppDatabase;
 import com.coretech.flashit.CardShape;
 import com.coretech.flashit.CardShapeAdapter;
 import com.coretech.flashit.CenterLayoutManager;
-import com.coretech.flashit.DaoCardSets;
 import com.coretech.flashit.ModelCardSets;
 import com.coretech.flashit.R;
 
@@ -30,6 +25,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private CardShapeAdapter adapter;
     private List<CardShape> cardShapes = new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
