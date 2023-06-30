@@ -36,8 +36,9 @@ public class CardsViewingTab extends AppCompatActivity {
         add_cards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CardsViewingTab.this, "Add Cards button was clicked", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CardsViewingTab.this, CreatingCardActivity.class);
+                intent.putExtra("card-set-id", getIntent().getExtras().getLong("card-set-id"));
+
                 startActivity(intent);
             }
         });

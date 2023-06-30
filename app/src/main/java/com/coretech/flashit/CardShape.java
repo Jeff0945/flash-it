@@ -1,17 +1,17 @@
 package com.coretech.flashit;
 
 public class CardShape {
-    private String subject;
+    private ModelCardSets cardSet;
 
-    public CardShape(String subject) {
-        this.subject = subject;
+    public CardShape(ModelCardSets cardSet) {
+        this.cardSet = cardSet;
     }
 
     public String getSubject() {
-        return subject;
+        return cardSet.name;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public long getId() {
+        return cardSet.id;
     }
 }

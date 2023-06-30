@@ -47,6 +47,8 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
         private ImageView editName_button;
         private LinearLayout layoutCardCreate;
 
+        private long cardSetId;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             subjectTextView = itemView.findViewById(R.id.subject_update_view);
@@ -91,6 +93,9 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
                 // Launch CardsViewingTab
                     Context context = itemView.getContext();
                     Intent intent = new Intent(context, CardsViewingTab.class);
+
+                    intent.putExtra("card-set-id", cardSetId);
+
                     context.startActivity(intent);
                 }
             });
@@ -100,6 +105,7 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
 
         public void bind(CardShape cardShape) {
             subjectTextView.setText(cardShape.getSubject());
+            cardSetId = cardShape.getId();
         }
     }
 }
