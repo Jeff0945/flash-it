@@ -18,12 +18,21 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.ArrayList; //added
 
 public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.ViewHolder> {
     private List<CardShape> cardShapes;
+    private List<CardShape> originalCardShapes; //added
 
     public CardShapeAdapter(List<CardShape> cardShapes) {
         this.cardShapes = cardShapes;
+        this.originalCardShapes = new ArrayList<>(cardShapes); //added
+    }
+
+    //added
+    public void setCardShapes(List<CardShape> cardShapes) {
+        this.cardShapes = cardShapes;
+        notifyDataSetChanged();
     }
 
     @NonNull
