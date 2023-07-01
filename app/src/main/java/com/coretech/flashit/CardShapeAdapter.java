@@ -1,9 +1,13 @@
 package com.coretech.flashit;
 
+import static java.security.AccessController.getContext;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,34 +76,66 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
             editName_button = itemView.findViewById(R.id.editName_button);
             deleteBTN = itemView.findViewById(R.id.deleteBTN);
 
-//            deleteBTN.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//
-//                    AppDatabase appDatabase = AppDatabase.getInstance(deleteBTN.getContext());
-//
-//                    AsyncTask.execute(() -> {
-//                        List<ModelCardSets> cardSets = appDatabase.cardSets().all();
-//
-//                    // Prompt the user with a confirmation dialog
-//                        AlertDialog.Builder builder = new AlertDialog.Builder(CardShapeAdapter.this);
-//                        builder.setTitle("Delete Category")
-//                                .setMessage("Are you sure you want to delete this category?")
-//                                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialogInterface, int i) {
-//                                        String selectedCategory = cardSets.get(position);
-//                                        removeCategory(selectedCategory);
-//                                        Toast.makeText(CardShapeAdapter.this, "Card deleted", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                })
-//                                .setNegativeButton("Cancel", null)
-//                                .show();
-//
-//                        return true;
-//                    });
-//                }
-//            });
+            //Delete Card Set
+            deleteBTN.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final Context context = view.getContext();
+                    AppDatabase appDatabase = AppDatabase.getInstance(context);
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            int position = getBindingAdapterPosition();
+                            List<ModelCardSets> cardSets = appDatabase.cardSets().all();
+
+                            if (position != RecyclerView.NO_POSITION) {
+                                ModelCardSets cardSetToDelete = cardSets.get(position);
+
+                                // Prompt the user with a confirmation dialog
+                                ((Activity) context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                        builder.setTitle("Delete CardSet")
+                                                .setMessage("Are you sure you want to delete this CardSet?")
+                                                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                        // Delete the cardSet from the database
+                                                        new Thread(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                appDatabase.cardSets().delete(cardSetToDelete);
+
+                                                                // Remove the cardSetToDelete from the cardSets list
+                                                                cardSets.remove(cardSetToDelete);
+
+                                                                // Notify the adapter that data has changed
+                                                                ((Activity) context).runOnUiThread(new Runnable() {
+                                                                    @Override
+                                                                    public void run() {
+                                                                        cardShapes.remove(position);
+                                                                        notifyItemRemoved(position);
+                                                                        notifyItemRangeChanged(position, cardShapes.size());
+                                                                    }
+                                                                });
+                                                            }
+                                                        }).start();
+
+                                                        // Display a success message
+                                                        Toast.makeText(context, "CardSet deleted successfully", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                })
+                                                .setNegativeButton("Cancel", null)
+                                                .show();
+                                    }
+                                });
+                            }
+                        }
+                    }).start();
+                }
+            });
 
             editName_button.setOnClickListener(new View.OnClickListener() {
                 @Override
