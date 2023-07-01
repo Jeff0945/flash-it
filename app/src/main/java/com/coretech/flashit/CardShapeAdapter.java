@@ -3,14 +3,19 @@ package com.coretech.flashit;
 import static java.security.AccessController.getContext;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,6 +25,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 import java.util.ArrayList; //added
@@ -60,7 +67,7 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView subjectTextView;
         private Button reviewButton;
-        private Button practiceButton;
+//        private Button practiceButton;
         private ImageView editName_button;
         private LinearLayout layoutCardCreate;
         private ImageView deleteBTN;
@@ -140,10 +147,8 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
             editName_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // Launch CreatingCardSetActivity
-                    Context context = itemView.getContext();
-                    Intent intent = new Intent(context, CreatingCardSetActivity.class);
-                    context.startActivity(intent);
+                    // Launch showUpdateNameDialog
+//                    showAddCategoryDialog();
                 }
             });
 
@@ -180,7 +185,6 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
                 }
             });
 
-
         }
 
         public void bind(CardShape cardShape) {
@@ -188,6 +192,67 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
             cardSetId = cardShape.getId();
         }
     }
+
+//    private boolean isUpdateNameDialogShowing = false; // Add this variable
+//
+//    private void showUpdateNameDialog() {
+//        if (isUpdateNameDialogShowing) {
+//            return; // Dialog is already showing, exit the method
+//        }
+//
+//        isUpdateNameDialogShowing = true; // Set the flag to indicate dialog is showing
+//
+//        final Dialog dialog = new Dialog(this);
+//        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface dialog) {
+//                isUpdateNameDialogShowing = false; // Reset the flag when the dialog is dismissed
+//            }
+//        });
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.setContentView(R.layout.modal_update_cardshapelayoutname);
+//
+//        ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
+//        Button confirmButton = dialog.findViewById(R.id.confirmButton);
+//
+//        cancelButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialog.dismiss();
+//            }
+//        });
+//
+//        confirmButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Retrieve the category entered by the user
+//                TextInputEditText categoryEditText = dialog.findViewById(R.id.updateNameInputEditText);
+//                String subject = categoryEditText.getText().toString();
+//
+//                // Check if the category is empty
+//                if (!subject.isEmpty()) {
+//                    // Save the Name to shared preferences
+//                    list.add(subject);
+//                    arrayAdapter.notifyDataSetChanged();
+//                    saveCategories(list);
+//                    Toast.makeText(CardShapeAdapter.this, "Updated Name: " + subject, Toast.LENGTH_SHORT).show();
+//
+//                    // Dismiss the dialog
+//                    dialog.dismiss();
+//                } else {
+//                    // Name is empty, display an error message
+//                    Toast.makeText(CardShapeAdapter.this, "Please enter a Name", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//
+//        dialog.show();
+//        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+//        dialog.getWindow().setGravity(Gravity.CENTER);
+//    }
+
 }
 
 
