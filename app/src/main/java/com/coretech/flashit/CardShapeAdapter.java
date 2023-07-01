@@ -90,57 +90,45 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
                     final Context context = view.getContext();
                     AppDatabase appDatabase = AppDatabase.getInstance(context);
 
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            int position = getBindingAdapterPosition();
-                            List<ModelCardSets> cardSets = appDatabase.cardSets().all();
+                    int position = getBindingAdapterPosition();
 
-                            if (position != RecyclerView.NO_POSITION) {
-                                ModelCardSets cardSetToDelete = cardSets.get(position);
+                    AsyncTask.execute(() -> {
+                        List<ModelCardSets> cardSets = appDatabase.cardSets().all();
 
-                                // Prompt the user with a confirmation dialog
-                                ((Activity) context).runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                        builder.setTitle("Delete CardSet")
-                                                .setMessage("Are you sure you want to delete this CardSet?")
-                                                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                                        // Delete the cardSet from the database
-                                                        new Thread(new Runnable() {
-                                                            @Override
-                                                            public void run() {
-                                                                appDatabase.cardSets().delete(cardSetToDelete);
+                        if (position != RecyclerView.NO_POSITION) {
+                            ModelCardSets cardSetToDelete = cardSets.get(position);
 
-                                                                // Remove the cardSetToDelete from the cardSets list
-                                                                cardSets.remove(cardSetToDelete);
+                            // Prompt the user with a confirmation dialog
+                            ((Activity) context).runOnUiThread(() -> {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                builder.setTitle("Delete CardSet")
+                                        .setMessage("Are you sure you want to delete this CardSet?")
+                                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                // Delete the cardSet from the database
+                                                AsyncTask.execute(() -> {
+                                                    appDatabase.cardSets().delete(cardSetToDelete);
+                                                    appDatabase.cardSets().getCards(cardSetId);
+                                                });
 
-                                                                // Notify the adapter that data has changed
-                                                                ((Activity) context).runOnUiThread(new Runnable() {
-                                                                    @Override
-                                                                    public void run() {
-                                                                        cardShapes.remove(position);
-                                                                        notifyItemRemoved(position);
-                                                                        notifyItemRangeChanged(position, cardShapes.size());
-                                                                    }
-                                                                });
-                                                            }
-                                                        }).start();
+                                                // Remove the cardSetToDelete from the cardSets list
+                                                cardSets.remove(cardSetToDelete);
 
-                                                        // Display a success message
-                                                        Toast.makeText(context, "CardSet deleted successfully", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                })
-                                                .setNegativeButton("Cancel", null)
-                                                .show();
-                                    }
-                                });
-                            }
+                                                // Notify the adapter that data has changed
+                                                cardShapes.remove(position);
+                                                notifyItemRemoved(position);
+                                                notifyItemRangeChanged(position, cardShapes.size());
+
+                                                // Display a success message
+                                                Toast.makeText(context, "CardSet deleted successfully", Toast.LENGTH_SHORT).show();
+                                            }
+                                        })
+                                        .setNegativeButton("Cancel", null)
+                                        .show();
+                            });
                         }
-                    }).start();
+                    });
                 }
             });
 
