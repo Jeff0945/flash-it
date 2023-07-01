@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView; //added
+import android.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,10 +25,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private CardShapeAdapter adapter;
     private List<CardShape> cardShapes = new ArrayList<>();
-    //added
     private SearchView searchView;
-    private List<CardShape> filteredCardShapes = new ArrayList<>();
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,9 +37,6 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new ItemSpacingDecoration(24)); // Set the spacing between items
 
-
-
-        //added
         searchView = rootView.findViewById(R.id.search_home);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -56,8 +50,6 @@ public class HomeFragment extends Fragment {
                 return true;
             }
         });
-
-
 
         AppDatabase database = AppDatabase.getInstance(getContext());
 
@@ -73,25 +65,30 @@ public class HomeFragment extends Fragment {
         return rootView;
     }
 
-
     //added
     private void filterCardShapes(String query) {
-        filteredCardShapes.clear();
+        AppDatabase database = AppDatabase.getInstance(getContext());
 
         if (query.isEmpty()) {
-            filteredCardShapes.addAll(cardShapes);
-        } else {
-            for (CardShape cardShape : cardShapes) {
-                if (cardShape.getSubject().toLowerCase().contains(query.toLowerCase())) {
-                    filteredCardShapes.add(cardShape);
+            AsyncTask.execute(() -> {
+                cardShapes.clear();
+
+                for (ModelCardSets cardSet : database.cardSets().all()) {
+                    cardShapes.add(new CardShape(cardSet));
                 }
-            }
+            });
+        } else {
+            AsyncTask.execute(() -> {
+                cardShapes.clear();
+
+                for (ModelCardSets cardSet : database.cardSets().search(query)) {
+                    cardShapes.add(new CardShape(cardSet));
+                }
+            });
         }
 
-        adapter.setCardShapes(filteredCardShapes);
+        adapter.notifyDataSetChanged();
     }
-
-
 
     private static class ItemSpacingDecoration extends RecyclerView.ItemDecoration {
         private int spacing;
