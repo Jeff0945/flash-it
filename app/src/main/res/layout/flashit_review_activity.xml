@@ -34,7 +34,7 @@
         app:srcCompat="@drawable/close" />
 
     <ImageView
-        android:id="@+id/left_button"
+        android:id="@+id/prev_button"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginEnd="16dp"
@@ -139,7 +139,7 @@
         android:layout_width="220dp"
         android:layout_height="50dp"
         android:backgroundTint="@color/teal_700"
-        android:text="Answer"
+        android:text="Show Answer"
         android:textSize="12sp"
         android:textStyle="bold"
         app:cornerRadius="25dp"
