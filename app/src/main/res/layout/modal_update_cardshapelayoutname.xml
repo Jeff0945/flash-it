@@ -24,20 +24,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="viewStart"
             android:text="Update Name"
             android:textSize="14sp"
-            android:padding="5dp"
+            android:paddingEnd="150dp"
             android:textColor="@color/black"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="5dp" />
+            android:layout_gravity="center"/>
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_clear_24"
-            android:layout_marginLeft="138dp"
-            android:layout_marginTop="8dp"
             android:id="@+id/cancelButton" />
 
     </LinearLayout>
