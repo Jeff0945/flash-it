@@ -35,7 +35,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder
 
     @Override
     public int getItemCount() {
-        return 12; // Number of items in the grid
+        return termsArray.length; // Number of items in the grid
     }
 
 
