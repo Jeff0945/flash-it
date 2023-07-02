@@ -18,6 +18,7 @@ public class CardsViewingTab extends AppCompatActivity {
     ImageView cancel_Button;
     Button add_cards;
     Button reviewButton;
+    private long cardSetId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +31,7 @@ public class CardsViewingTab extends AppCompatActivity {
         reviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CardsViewingTab.this, ReviewActivity.class);
-                startActivity(intent);
+                launchReviewActivity();
             }
         });
 
@@ -55,7 +55,7 @@ public class CardsViewingTab extends AppCompatActivity {
         });
 
         AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
-        long cardSetId = getIntent().getExtras().getLong("card-set-id");
+        cardSetId = getIntent().getExtras().getLong("card-set-id");
 
         AsyncTask.execute(() -> {
             List<ModelCards> cards = appDatabase.cardSets().getCards(cardSetId);
@@ -75,5 +75,11 @@ public class CardsViewingTab extends AppCompatActivity {
                 }
             });
         });
+    }
+
+    private void launchReviewActivity() {
+        Intent intent = new Intent(CardsViewingTab.this, ReviewActivity.class);
+        intent.putExtra("card-set-id", cardSetId);
+        startActivity(intent);
     }
 }
