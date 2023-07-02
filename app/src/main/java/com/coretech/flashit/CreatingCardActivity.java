@@ -28,19 +28,29 @@ public class CreatingCardActivity extends AppCompatActivity {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
+        Bundle extras = getIntent().getExtras();
+        boolean fromCardViewingTab = extras.containsKey("from-card-viewing-tab");
+
+        cardSetId = extras.getLong("card-set-id");
+
         add_another_cards = findViewById(R.id.add_another_cards);
         cancel_Button = findViewById(R.id.cancel_Button);
         check_button = findViewById(R.id.check_button);
         termInputField = findViewById(R.id.termInputEditText);
         descriptionInputField = findViewById(R.id.descriptionInputEditText);
 
-        cardSetId = getIntent().getExtras().getLong("card-set-id");
-
         cancel_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CreatingCardActivity.this, "Close button was clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(CreatingCardActivity.this, CreatingCardSetActivity.class);
+                Intent intent;
+
+                if (fromCardViewingTab) {
+                    intent = new Intent(CreatingCardActivity.this, CardsViewingTab.class);
+                    intent.putExtra("card-set-id", cardSetId);
+                } else {
+                    intent = new Intent(CreatingCardActivity.this, CreatingCardSetActivity.class);
+                }
+
                 startActivity(intent);
             }
         });
@@ -49,7 +59,14 @@ public class CreatingCardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (saveToDatabase(termInputField.getText().toString(), descriptionInputField.getText().toString())) {
-                    Intent intent = new Intent(CreatingCardActivity.this, MainActivity.class);
+                    Intent intent;
+
+                    if (fromCardViewingTab) {
+                        intent = new Intent(CreatingCardActivity.this, CardsViewingTab.class);
+                        intent.putExtra("card-set-id", cardSetId);
+                    } else {
+                        intent = new Intent(CreatingCardActivity.this, MainActivity.class);
+                    }
 
                     startActivity(intent);
                 }
