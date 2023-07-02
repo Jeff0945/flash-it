@@ -48,7 +48,7 @@ public class CreatingCardActivity extends AppCompatActivity {
                     intent = new Intent(CreatingCardActivity.this, CardsViewingTab.class);
                     intent.putExtra("card-set-id", cardSetId);
                 } else {
-                    intent = new Intent(CreatingCardActivity.this, CreatingCardSetActivity.class);
+                    intent = new Intent(CreatingCardActivity.this, MainActivity.class);
                 }
 
                 startActivity(intent);

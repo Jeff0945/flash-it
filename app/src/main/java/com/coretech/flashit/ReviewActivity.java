@@ -21,9 +21,7 @@ public class ReviewActivity extends AppCompatActivity {
         close_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ReviewActivity.this, "Close button was clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ReviewActivity.this, MainActivity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
     }

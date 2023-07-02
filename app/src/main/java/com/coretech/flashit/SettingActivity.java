@@ -51,9 +51,7 @@ public class SettingActivity extends AppCompatActivity {
         cancel_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(SettingActivity.this, "Close button was clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SettingActivity.this, MainActivity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
     }
