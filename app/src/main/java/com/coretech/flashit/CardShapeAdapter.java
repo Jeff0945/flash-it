@@ -87,44 +87,44 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
                     final Context context = view.getContext();
                     AppDatabase appDatabase = AppDatabase.getInstance(context);
 
-                    int position = getBindingAdapterPosition();
+                            int position = getBindingAdapterPosition();
 
                     AsyncTask.execute(() -> {
-                        List<ModelCardSets> cardSets = appDatabase.cardSets().all();
+                            List<ModelCardSets> cardSets = appDatabase.cardSets().all();
 
-                        if (position != RecyclerView.NO_POSITION) {
-                            ModelCardSets cardSetToDelete = cardSets.get(position);
+                            if (position != RecyclerView.NO_POSITION) {
+                                ModelCardSets cardSetToDelete = cardSets.get(position);
 
-                            // Prompt the user with a confirmation dialog
+                                // Prompt the user with a confirmation dialog
                             ((Activity) context).runOnUiThread(() -> {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
                                 builder.setTitle("Delete card set")
                                         .setMessage("Are you sure you want to delete this card set?")
-                                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                // Delete the cardSet from the database
+                                                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                        // Delete the cardSet from the database
                                                 AsyncTask.execute(() -> {
-                                                    appDatabase.cardSets().delete(cardSetToDelete);
+                                                                appDatabase.cardSets().delete(cardSetToDelete);
                                                     appDatabase.cardSets().getCards(cardSetId);
                                                 });
 
-                                                // Remove the cardSetToDelete from the cardSets list
-                                                cardSets.remove(cardSetToDelete);
+                                                                // Remove the cardSetToDelete from the cardSets list
+                                                                cardSets.remove(cardSetToDelete);
 
-                                                // Notify the adapter that data has changed
-                                                cardShapes.remove(position);
-                                                notifyItemRemoved(position);
-                                                notifyItemRangeChanged(position, cardShapes.size());
+                                                                // Notify the adapter that data has changed
+                                                                        cardShapes.remove(position);
+                                                                        notifyItemRemoved(position);
+                                                                        notifyItemRangeChanged(position, cardShapes.size());
 
-                                                // Display a success message
+                                                        // Display a success message
                                                 Toast.makeText(context, "Card set deleted successfully", Toast.LENGTH_SHORT).show();
-                                            }
-                                        })
-                                        .setNegativeButton("Cancel", null)
-                                        .show();
-                            });
-                        }
+                                                    }
+                                                })
+                                                .setNegativeButton("Cancel", null)
+                                                .show();
+                                });
+                            }
                     });
                 }
             });
@@ -138,13 +138,13 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
                 }
             });
 
-
             reviewButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Launch ReviewActivity
                     Context context = itemView.getContext();
                     Intent intent = new Intent(context, ReviewActivity.class);
+                    intent.putExtra("card-set-id",cardSetId);
                     context.startActivity(intent);
                 }
             });
