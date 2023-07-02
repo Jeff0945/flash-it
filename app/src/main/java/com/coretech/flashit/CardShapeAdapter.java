@@ -98,8 +98,8 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
                             // Prompt the user with a confirmation dialog
                             ((Activity) context).runOnUiThread(() -> {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                builder.setTitle("Delete CardSet")
-                                        .setMessage("Are you sure you want to delete this CardSet?")
+                                builder.setTitle("Delete card set")
+                                        .setMessage("Are you sure you want to delete this card set?")
                                         .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -118,7 +118,7 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
                                                 notifyItemRangeChanged(position, cardShapes.size());
 
                                                 // Display a success message
-                                                Toast.makeText(context, "CardSet deleted successfully", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context, "Card set deleted successfully", Toast.LENGTH_SHORT).show();
                                             }
                                         })
                                         .setNegativeButton("Cancel", null)
@@ -214,32 +214,36 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss(); // Dismiss the dialog before performing database operation
-
-                AppDatabase appDatabase = AppDatabase.getInstance(appContext);
-
                 // Retrieve the name entered by the user
                 TextInputEditText nameEditText = dialog.findViewById(R.id.updateNameInputEditText);
                 String newName = nameEditText.getText().toString();
 
-                AsyncTask.execute(() -> {
-                    List<ModelCardSets> cardSets = appDatabase.cardSets().all();
-                    if (position != RecyclerView.NO_POSITION && position < cardSets.size()) {
-                        ModelCardSets cardSetToUpdate = cardSets.get(position);
-                        cardSetToUpdate.name = newName;
-                        appDatabase.cardSets().update(cardSetToUpdate);
+                if (newName.length() > 0) {
+                    AppDatabase appDatabase = AppDatabase.getInstance(appContext);
 
-                        ((Activity) context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                cardSets.set(position, cardSetToUpdate);
-                                cardShapes.set(position, new CardShape(cardSetToUpdate));
-                                notifyItemChanged(position);
-                                Toast.makeText(context, "Updated Name: " + newName, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
+                    AsyncTask.execute(() -> {
+                        List<ModelCardSets> cardSets = appDatabase.cardSets().all();
+                        if (position != RecyclerView.NO_POSITION && position < cardSets.size()) {
+                            ModelCardSets cardSetToUpdate = cardSets.get(position);
+                            cardSetToUpdate.name = newName;
+                            appDatabase.cardSets().update(cardSetToUpdate);
+
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    cardSets.set(position, cardSetToUpdate);
+                                    cardShapes.set(position, new CardShape(cardSetToUpdate));
+                                    notifyItemChanged(position);
+                                    Toast.makeText(context, "Name updated to " + newName, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+
+                    dialog.dismiss(); // Dismiss the dialog before performing database operation
+                } else {
+                    Toast.makeText(context, "Name field is required.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
