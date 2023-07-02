@@ -1,10 +1,5 @@
 package com.coretech.flashit;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -42,6 +40,7 @@ public class CardsViewingTab extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CardsViewingTab.this, CreatingCardActivity.class);
                 intent.putExtra("card-set-id", getIntent().getExtras().getLong("card-set-id"));
+                intent.putExtra("from-card-viewing-tab", true);
 
                 startActivity(intent);
             }
