@@ -3,12 +3,17 @@ package com.coretech.flashit;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class CardsViewingTab extends AppCompatActivity {
 
@@ -52,33 +57,39 @@ public class CardsViewingTab extends AppCompatActivity {
             }
         });
 
-        // Define the terms and descriptions for each block
-        String[] termsArray = {
-                "Term 1", "Term 2",
-                "Term 3", "Term 4",
-                "Term 5", "Term 6",
-                "Term 7", "Term 8",
-                "Term 9", "Term 10,",
-                "Term 11", "Term 12" };
-        String[] descriptionArray = {
-                "Description 1", "Description 2",
-                "Description 3", "Description 4",
-                "Description 5", "Description 6",
-                "Description 7", "Description 8",
-                "Description 9", "Description 10",
-                "Description 11", "Description 12"
-        };
+        AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
+        long cardSetId = getIntent().getExtras().getLong("card-set-id");
 
-        // Create the GridAdapter and set it to the RecyclerView
-        GridAdapter gridAdapter = new GridAdapter(termsArray, descriptionArray);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView2);
-        recyclerView.setAdapter(gridAdapter);
+        AsyncTask.execute(() -> {
+            List<ModelCards> cards = appDatabase.cardSets().getCards(cardSetId);
 
-        // Add spacing between the items in the grid
-        int spanCount = 2; // Number of columns in the grid
-        int spacing = 16; // Spacing between items in pixels
-        boolean includeEdge = true; // Whether to include spacing at the edges of the grid
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
+            if (cards.isEmpty()) {
+                // Handle the case where there are no cards
+                runOnUiThread(() -> {
+                    Toast.makeText(getApplicationContext(), "Card set is empty", Toast.LENGTH_SHORT).show();// Display appropriate message or take necessary action
+                });
+                return;
+            }
 
+            String[] termsArray = new String[cards.size()];
+            String[] descriptionArray = new String[cards.size()];
+
+            for (int i = 0; i < cards.size(); i++) {
+                ModelCards card = cards.get(i);
+                termsArray[i] = card.question;
+                descriptionArray[i] = card.answer;
+            }
+
+            runOnUiThread(() -> {
+                GridAdapter gridAdapter = new GridAdapter(termsArray, descriptionArray);
+                RecyclerView recyclerView = findViewById(R.id.recyclerView2);
+                recyclerView.setAdapter(gridAdapter);
+
+                int spanCount = 2;
+                int spacing = 16;
+                boolean includeEdge = true;
+                recyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
+            });
+        });
     }
 }
