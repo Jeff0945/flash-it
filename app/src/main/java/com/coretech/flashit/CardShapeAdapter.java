@@ -1,7 +1,5 @@
 package com.coretech.flashit;
 
-import static java.security.AccessController.getContext;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -10,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -135,10 +132,12 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
             editName_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // Launch showUpdateNameDialog
-//                    showAddCategoryDialog();
+                    final Context context = view.getContext();
+                    int position = getBindingAdapterPosition();
+                    showUpdateNameDialog(context, position);
                 }
             });
+
 
             reviewButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -181,66 +180,75 @@ public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.View
         }
     }
 
-//    private boolean isUpdateNameDialogShowing = false; // Add this variable
-//
-//    private void showUpdateNameDialog() {
-//        if (isUpdateNameDialogShowing) {
-//            return; // Dialog is already showing, exit the method
-//        }
-//
-//        isUpdateNameDialogShowing = true; // Set the flag to indicate dialog is showing
-//
-//        final Dialog dialog = new Dialog(this);
-//        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-//            @Override
-//            public void onDismiss(DialogInterface dialog) {
-//                isUpdateNameDialogShowing = false; // Reset the flag when the dialog is dismissed
-//            }
-//        });
-//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        dialog.setContentView(R.layout.modal_update_cardshapelayoutname);
-//
-//        ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
-//        Button confirmButton = dialog.findViewById(R.id.confirmButton);
-//
-//        cancelButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        confirmButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // Retrieve the category entered by the user
-//                TextInputEditText categoryEditText = dialog.findViewById(R.id.updateNameInputEditText);
-//                String subject = categoryEditText.getText().toString();
-//
-//                // Check if the category is empty
-//                if (!subject.isEmpty()) {
-//                    // Save the Name to shared preferences
-//                    list.add(subject);
-//                    arrayAdapter.notifyDataSetChanged();
-//                    saveCategories(list);
-//                    Toast.makeText(CardShapeAdapter.this, "Updated Name: " + subject, Toast.LENGTH_SHORT).show();
-//
-//                    // Dismiss the dialog
-//                    dialog.dismiss();
-//                } else {
-//                    // Name is empty, display an error message
-//                    Toast.makeText(CardShapeAdapter.this, "Please enter a Name", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//
-//        dialog.show();
-//        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-//        dialog.getWindow().setGravity(Gravity.CENTER);
-//    }
+    private boolean isUpdateNameDialogShowing = false;
 
+    private void showUpdateNameDialog(final Context context, final int position) {
+        if (isUpdateNameDialogShowing) {
+            return; // Dialog is already showing, exit the method
+        }
+
+        isUpdateNameDialogShowing = true; // Set the flag to indicate dialog is showing
+
+        final Dialog dialog = new Dialog(context);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                isUpdateNameDialogShowing = false; // Reset the flag when the dialog is dismissed
+            }
+        });
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.modal_update_cardshapelayoutname);
+
+        ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
+        Button confirmButton = dialog.findViewById(R.id.confirmButton);
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        final Context appContext = context.getApplicationContext();
+
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss(); // Dismiss the dialog before performing database operation
+
+                AppDatabase appDatabase = AppDatabase.getInstance(appContext);
+
+                // Retrieve the name entered by the user
+                TextInputEditText nameEditText = dialog.findViewById(R.id.updateNameInputEditText);
+                String newName = nameEditText.getText().toString();
+
+                AsyncTask.execute(() -> {
+                    List<ModelCardSets> cardSets = appDatabase.cardSets().all();
+                    if (position != RecyclerView.NO_POSITION && position < cardSets.size()) {
+                        ModelCardSets cardSetToUpdate = cardSets.get(position);
+                        cardSetToUpdate.name = newName;
+                        appDatabase.cardSets().update(cardSetToUpdate);
+
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                cardSets.set(position, cardSetToUpdate);
+                                cardShapes.set(position, new CardShape(cardSetToUpdate));
+                                notifyItemChanged(position);
+                                Toast.makeText(context, "Updated Name: " + newName, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.CENTER);
+    }
 }
 
 
