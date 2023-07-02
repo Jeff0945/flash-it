@@ -31,9 +31,7 @@ public class FeedbackActivity extends AppCompatActivity {
         cancel_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(FeedbackActivity.this, "Close button was clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(FeedbackActivity.this, MainActivity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
 
