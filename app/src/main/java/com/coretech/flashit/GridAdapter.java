@@ -7,17 +7,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 
 // for display of items at the recycler view in the CardsViewingTab
 
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder> {
+    private List<ModelCards> cards;
 
-    private String[] termsArray;
-    private String[] descriptionArray;
-
-    public GridAdapter(String[] termsArray, String[] descriptionArray) {
-        this.termsArray = termsArray;
-        this.descriptionArray = descriptionArray;
+    public GridAdapter(List<ModelCards> cards) {
+        this.cards = cards;
     }
 
     @NonNull
@@ -29,13 +28,13 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull GridViewHolder holder, int position) {
-        holder.termsTextView.setText(termsArray[position]);
-        holder.descriptionTextView.setText(descriptionArray[position]);
+        holder.termsTextView.setText(cards.get(position).question);
+        holder.descriptionTextView.setText(cards.get(position).answer);
     }
 
     @Override
     public int getItemCount() {
-        return termsArray.length; // Number of items in the grid
+        return cards.size(); // Number of items in the grid
     }
 
 
