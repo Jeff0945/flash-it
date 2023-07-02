@@ -32,7 +32,6 @@ public class CardsViewingTab extends AppCompatActivity {
         reviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CardsViewingTab.this, "Review button was clicked", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CardsViewingTab.this, ReviewActivity.class);
                 startActivity(intent);
             }
@@ -51,7 +50,6 @@ public class CardsViewingTab extends AppCompatActivity {
         cancel_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CardsViewingTab.this, "Close button was clicked", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CardsViewingTab.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -63,32 +61,19 @@ public class CardsViewingTab extends AppCompatActivity {
         AsyncTask.execute(() -> {
             List<ModelCards> cards = appDatabase.cardSets().getCards(cardSetId);
 
-            if (cards.isEmpty()) {
-                // Handle the case where there are no cards
-                runOnUiThread(() -> {
-                    Toast.makeText(getApplicationContext(), "Card set is empty", Toast.LENGTH_SHORT).show();// Display appropriate message or take necessary action
-                });
-                return;
-            }
-
-            String[] termsArray = new String[cards.size()];
-            String[] descriptionArray = new String[cards.size()];
-
-            for (int i = 0; i < cards.size(); i++) {
-                ModelCards card = cards.get(i);
-                termsArray[i] = card.question;
-                descriptionArray[i] = card.answer;
-            }
-
             runOnUiThread(() -> {
-                GridAdapter gridAdapter = new GridAdapter(termsArray, descriptionArray);
-                RecyclerView recyclerView = findViewById(R.id.recyclerView2);
-                recyclerView.setAdapter(gridAdapter);
+                if (cards.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Card set is empty", Toast.LENGTH_SHORT).show();// Display appropriate message or take necessary action
+                } else {
+                    GridAdapter gridAdapter = new GridAdapter(cards);
+                    RecyclerView recyclerView = findViewById(R.id.recyclerView2);
+                    recyclerView.setAdapter(gridAdapter);
 
-                int spanCount = 2;
-                int spacing = 16;
-                boolean includeEdge = true;
-                recyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
+                    int spanCount = 2;
+                    int spacing = 16;
+                    boolean includeEdge = true;
+                    recyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
+                }
             });
         });
     }
