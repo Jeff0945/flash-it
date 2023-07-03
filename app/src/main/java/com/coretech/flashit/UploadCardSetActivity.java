@@ -16,7 +16,6 @@ public class UploadCardSetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_upload_card_set);
 
         ImageView goBack = findViewById(R.id.goBackButton);
-        ;
 
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override

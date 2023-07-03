@@ -1,33 +1,18 @@
 package com.coretech.flashit;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.coretech.flashit.ui.home.HomeFragment;
-import com.coretech.flashit.ui.profile.ProfileFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.coretech.flashit.databinding.ActivityMainBinding;
+import com.coretech.flashit.ui.home.HomeFragment;
+import com.coretech.flashit.ui.profile.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //will be use on the next update
-
     /*
     private void showBottomDialog(){
         final Dialog dialog = new Dialog(this);
