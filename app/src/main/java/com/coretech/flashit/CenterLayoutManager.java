@@ -6,8 +6,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 
 public class CenterLayoutManager extends LinearLayoutManager {
 

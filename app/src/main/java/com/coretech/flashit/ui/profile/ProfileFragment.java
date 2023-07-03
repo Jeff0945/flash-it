@@ -2,23 +2,16 @@ package com.coretech.flashit.ui.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.coretech.flashit.CreatingCardSetActivity;
+import androidx.fragment.app.Fragment;
+
 import com.coretech.flashit.FeedbackActivity;
-import com.coretech.flashit.MainActivity;
 import com.coretech.flashit.R;
 import com.coretech.flashit.SettingActivity;
-import com.coretech.flashit.ui.settings.SettingsFragment;
 
 public class ProfileFragment extends Fragment {
 

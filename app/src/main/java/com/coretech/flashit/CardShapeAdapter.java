@@ -26,15 +26,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
-import java.util.ArrayList; //added
 
 public class CardShapeAdapter extends RecyclerView.Adapter<CardShapeAdapter.ViewHolder> {
     private List<CardShape> cardShapes;
-    private List<CardShape> originalCardShapes; //added
 
     public CardShapeAdapter(List<CardShape> cardShapes) {
         this.cardShapes = cardShapes;
-        this.originalCardShapes = new ArrayList<>(cardShapes); //added
     }
 
     //added

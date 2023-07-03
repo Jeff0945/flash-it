@@ -1,48 +1,28 @@
 package com.coretech.flashit;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class CreatingCardSetActivity extends AppCompatActivity {
 
     ImageView cancel_Button;
     ImageView check_button;
     Button add_cards;
-    TextView category_btn;
-    ListView list_view;
+//    TextView category_btn;
+//    ListView list_view;
     TextView cardSetName;
-    ArrayList<String> list;
-    Button confirmButton;
-
-    ArrayAdapter<String> arrayAdapter;
+//    ArrayList<String> list;
+//    Button confirmButton;
+//    ArrayAdapter<String> arrayAdapter;
 
     private SharedPreferences sharedPreferences;
     private static final String PREF_NAME = "CategoryPreferences";

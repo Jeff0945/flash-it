@@ -24,10 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
-
-
 // for display of items at the recycler view in the CardsViewingTab
-
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder> {
     private List<ModelCards> cards;
 
@@ -55,11 +52,9 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder
         return cards.size(); // Number of items in the grid
     }
 
-
     public class GridViewHolder extends RecyclerView.ViewHolder {
         TextView termsTextView;
         TextView descriptionTextView;
-
         private ImageView deleteButton;
         private ImageView editButton;
 
